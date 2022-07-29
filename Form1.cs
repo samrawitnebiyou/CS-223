@@ -14,10 +14,12 @@ namespace labform1
     public partial class Form1 : Form
     {
 
-        public Form1()
+        public Form1(string user, string pass)//(string user)
         {
 
             InitializeComponent();
+            lbl_logname.Text = user;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -43,6 +45,21 @@ namespace labform1
 
         private void btn_additem_Click(object sender, EventArgs e)
         {
+            /*   string message = " ";
+               foreach(var item in checkedListBox1.CheckedItems)
+               {
+                   message+=item.ToString();   
+               }
+               MessageBox.Show(message);
+               if (radioButton1.Checked)
+               {
+                   MessageBox.Show("simple");
+               }
+               if (radioButton2.Checked)
+               {
+                   MessageBox.Show("variable");
+               }
+              */
             Boolean isVal = true;
             Regex re = new Regex(@"^[0-9]{5}$");
             if (!re.IsMatch(txt_inventorynumber.Text))
@@ -90,6 +107,20 @@ namespace labform1
                 items.Objectname = txt_objectname.Text;
                 items.Count = int.Parse(txt_count.Text);
                 items.Price = double.Parse(txt_price.Text);
+                items.isAvailable = chkbox_isavail.Checked;
+                items.isSimple = radioBtn_Simple.Checked;
+                items.isVariable = radioBtn_variable.Checked;
+                string message = "";
+                /*  foreach(var item in checkedListBox1.CheckedItems)
+                  {
+                      items.isExtReg = checkedListBox1.CheckedItems.Contains(item);
+                  }*/
+                foreach (var item in checkedListBox1.CheckedItems)
+                {
+                    message += item.ToString() + '\n';
+                }
+                MessageBox.Show(message);
+
                 items.Save();
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = item.getAll();
@@ -112,6 +143,22 @@ namespace labform1
         }
 
         private void txt_objectname_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }
