@@ -8,6 +8,7 @@ namespace labform1
 {
     class item
     {
+        private static List<item> items = new List<item>();
         public int Number { get; set; }
 
         public string Date { get; set; }
@@ -19,11 +20,22 @@ namespace labform1
 
         public double Price { get; set; }
 
-        
+        public bool isAvailable { get; set; }
+
+
+        public bool isSimple { get; set; }
+        public bool isVariable { get; set; }
+
+
 
         public void Save()
         {
-            Console.WriteLine("SAVED");
+            items.Add(this);
+            //  Console.WriteLine("SAVED");
+        }
+        static public List<item> getAll()
+        {
+            return items;
         }
     }
 }
